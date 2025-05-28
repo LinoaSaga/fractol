@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:13 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/27 11:58:57 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/05/28 14:30:40 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,22 @@
 # include "mlx.h"
 # include "keys.h"
 # include <stdlib.h>
+# include <stdio.h>
 
 /*		windows params	*/
 # define HEIGHT 900
 # define WIDTH 900
 
 /*		computation params	*/
-# define N_ITER 60
+# define MAX_ITER 60
 
 /*		fractal possible types	*/
 # define MANDELBROT 1
+
+/*		colors	*/
+# define COLOR_BLACK 0x000000
+# define COLOR_EMERALD_SEA 0x00e1d0
+# define COLOR_WHITE 0xffffff
 
 /*  t_fractol:
 	core data structure of the program
@@ -39,16 +45,16 @@
 */
 typedef struct s_fractol
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	char	f_type;
-	int		min_r;
-	int		max_r;
-	int		min_i;
-	int		max_i;
-	int		*palette;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	int			*addr;
+	char		f_type;
+	double		min_r;
+	double		max_r;
+	double		min_i;
+	double		max_i;
+	int			*palette;
 }	t_fractol;
 
 /*		init	*/
@@ -59,6 +65,8 @@ void			init(t_fractol *f);
 /*		hook	*/
 
 int				end_fractol(t_fractol *f);
+int				key_hook(int keycode, t_fractol *f);
+int				mouse_hook(int keycode, int x, int y, t_fractol *f);
 
 /*		color	*/
 
@@ -66,7 +74,7 @@ void			set_color(t_fractol *f);
 
 /*		fractal sets	*/
 
-unsigned int	mandelbrot(int cr, int ci);
+unsigned int	mandelbrot(double cr, double ci);
 
 /*		render	*/
 

@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:31:10 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/27 11:45:17 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/05/28 10:34:34 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	c_init(t_fractol *f)
 /* set_layout :
 	initial layout is dependent of the fractal type we display
 	to get something aesthetic
+	calculate the last one based on the 3 other to avoid deformation
 */
 void	set_layout(t_fractol *f)
 {
@@ -41,10 +42,10 @@ void	set_layout(t_fractol *f)
 		return ;
 	if (f->f_type == MANDELBROT)
 	{
-		f->min_r = -2;
-		f->max_r = 1;
-		f->min_i = -1;
-		f->max_i = 1;
+		f->min_r = -2.0;
+		f->max_r = 1.0;
+		f->min_i = -1.5;
+		f->max_i = f->min_i + (f->max_r - f->min_r) * HEIGHT / WIDTH;
 	}
 }
 
@@ -53,7 +54,7 @@ void	set_layout(t_fractol *f)
 */
 void	init(t_fractol *f)
 {
-	f->mlx = mlx_init;
+	f->mlx = mlx_init();
 	if (!f->mlx)
 		end_fractol(f);
 	f->win = mlx_new_window(f->mlx, WIDTH, HEIGHT, "Fractol");

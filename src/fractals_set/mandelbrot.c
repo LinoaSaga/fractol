@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:04:49 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/27 11:23:16 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/05/28 11:06:44 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 
 /* mandelbrot :
 	cf definition of Mandelbrot set : we test the convergence of the suite
-	Since if |z| > 2 we obviously end up diverging, we note the number of 
+	Since if |z| > 2 we end up diverging, we note the number of 
 	iterations to eventually reach this situation, while being limited to 
-	N_ITER for computation time
+	MAX_ITER for computation time
 */
-unsigned int	mandelbrot(int cr, int ci)
+unsigned int	mandelbrot(double cr, double ci)
 {
 	unsigned int	k;
-	int				zr;
-	int				zi;
+	double			zr;
+	double			zi;
+	double			tmp;
 
 	k = -1;
 	zr = 0;
 	zi = 0;
-	while (++k < N_ITER)
+	while (++k < MAX_ITER)
 	{
+		tmp = 2 * zr * zi + ci;
 		zr = zr * zr - zi * zi + cr;
-		zi = 2 * zr * zi + ci;
+		zi = tmp;
 		if (zr * zr + zi * zi > 4)
 			return (k);
 	}

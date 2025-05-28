@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:24:32 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/27 12:00:25 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/05/28 13:30:22 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	pixel_put(t_fractol *f, int x, int y, int color)
 
 /* set_image :
 	create the img and set the address of the first pixel
+	reset the image if there was one already
 */
 void	set_image(t_fractol *f)
 {
@@ -34,14 +35,19 @@ void	set_image(t_fractol *f)
 	int	line_length;
 	int	endian;
 
-	f->img = mlx_new_img(f->mlx, WIDTH, HEIGHT);
-	f->addr = mlx_get_data_addr(f->img, &bits_per_pixel, &line_length, &endian);
+	if (f->img)
+		mlx_destroy_image(f->mlx, f->img);
+	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
+	if (!f->img)
+		end_fractol(f);
+	f->addr = (int *) mlx_get_data_addr(f->img, &bits_per_pixel,
+			&line_length, &endian);
 }
 
 /* calculate_fractal :
 	call the relevant function, depending on the fractal type
 */
-unsigned int	calculate_fractal(t_fractol *f, int cr, int ci)
+unsigned int	calculate_fractal(t_fractol *f, double cr, double ci)
 {
 	if (f->f_type == MANDELBROT)
 		return (mandelbrot(cr, ci));
@@ -53,21 +59,22 @@ unsigned int	calculate_fractal(t_fractol *f, int cr, int ci)
 */
 void	render(t_fractol *f)
 {
-	int	x;
-	int	y;
-	int	cr;
-	int	ci;
-	int	n_iter_p;
+	int		x;
+	int		y;
+	double	cr;
+	double	ci;
+	int		n_iter_p;
 
 	set_image(f);
+	mlx_clear_window(f->mlx, f->win);
 	x = -1;
 	while (++x < WIDTH)
 	{
 		y = -1;
 		while (++y < HEIGHT)
 		{
-			cr = f->min_r + x * (f->max_r - f->min_r) / (WIDTH - 1);
-			ci = f->min_i + y * (f->max_i - f->min_i) / (HEIGHT - 1);
+			cr = f->min_r + (double) x * (f->max_r - f->min_r) / (WIDTH - 1);
+			ci = f->min_i + (double) y * (f->max_i - f->min_i) / (HEIGHT - 1);
 			n_iter_p = calculate_fractal(f, cr, ci);
 			pixel_put(f, x, y, f->palette[n_iter_p]);
 		}

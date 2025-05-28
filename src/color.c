@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:54:54 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/27 11:20:25 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/05/28 14:30:55 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	ponderate_mean(int color1, int color2, double w)
 	rgb1[0] = (color1) & 0xff;
 	rgb1[1] = (color1 >> 8) & 0xff;
 	rgb1[2] = (color1 >> 16) & 0xff;
-	rgb1[0] = (color2) & 0xff;
-	rgb1[1] = (color2 >> 8) & 0xff;
-	rgb1[2] = (color2 >> 16) & 0xff;
+	rgb2[0] = (color2) & 0xff;
+	rgb2[1] = (color2 >> 8) & 0xff;
+	rgb2[2] = (color2 >> 16) & 0xff;
 	rgb_res[0] = (1 - w) * rgb1[0] + w * rgb2[0];
 	rgb_res[1] = (1 - w) * rgb1[1] + w * rgb2[1];
 	rgb_res[2] = (1 - w) * rgb1[2] + w * rgb2[2];
@@ -46,21 +46,22 @@ void	set_color_neon(t_fractol *f)
 	double	w;
 	int		k;
 
-	color1 = 0x000000;
-	color2 = 0x00e1d0;
-	color3 = 0xffffff;
+	color1 = COLOR_BLACK;
+	color2 = COLOR_EMERALD_SEA;
+	color3 = COLOR_WHITE;
 	k = -1;
-	while (++k < N_ITER / 2)
+	while (++k < MAX_ITER / 2)
 	{
-		w = (double) k / (N_ITER / 2 - 1);
+		w = ((double) k) / (MAX_ITER / 2.0 - 1.0);
 		f->palette[k] = ponderate_mean(color1, color2, w);
 	}
-	while (++k < N_ITER - 1)
+	while (k < MAX_ITER)
 	{
-		w = (double)(k - N_ITER / 2) / (N_ITER - 2 - N_ITER / 2);
+		w = ((double) k - MAX_ITER / 2.0) / (MAX_ITER - 1.0 - MAX_ITER / 2.0);
 		f->palette[k] = ponderate_mean(color2, color3, w);
+		k++;
 	}
-	f->palette[k] = 0x00000000;
+	f->palette[k] = 0xff000000;
 }
 
 /* set_color :
@@ -71,7 +72,7 @@ void	set_color(t_fractol *f)
 {
 	if (!f->mlx)
 		return ;
-	f->palette = malloc(N_ITER * sizeof(int));
+	f->palette = malloc((MAX_ITER + 1) * sizeof(int));
 	if (!f->palette)
 		return ;
 	set_color_neon(f);

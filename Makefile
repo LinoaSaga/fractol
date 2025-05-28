@@ -6,12 +6,12 @@
 #    By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 09:37:05 by ljudd             #+#    #+#              #
-#    Updated: 2025/05/27 12:20:30 by ljudd            ###   ########.fr        #
+#    Updated: 2025/05/28 14:19:32 by ljudd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -O3
 NAME			= fractol
 INCLUDES		= -Imlx -Iincludes
 
@@ -22,7 +22,7 @@ SRC				= fractol.c \
 					hook.c \
 					init.c \
 					render.c \
-					fractal_set/mandelbrot.c
+					fractals_set/mandelbrot.c
 SOURCES			= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects
@@ -56,8 +56,10 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJECTS): $(OBJ_PATH)
+
+$(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
-	@mkdir $(OBJ_PATH)fractal_sets/
+	@mkdir $(OBJ_PATH)fractals_set/
 
 $(MLX):
 	@make -C $(MLX_DIR) all --no-print-directory
