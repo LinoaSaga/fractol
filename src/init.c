@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:31:10 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 10:34:34 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/05/28 15:14:54 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	c_init(t_fractol *f)
 	f->img = NULL;
 	f->addr = NULL;
 	f->f_type = -1;
-	f->min_r = 0;
-	f->max_r = 0;
-	f->min_i = 0;
-	f->max_i = 0;
+	f->min_r = 0.0;
+	f->max_r = 0.0;
+	f->min_i = 0.0;
+	f->max_i = 0.0;
+	f->julia_r = 0.0;
+	f->julia_i = 0.0;
 	f->palette = NULL;
 }
 
@@ -46,6 +48,20 @@ void	set_layout(t_fractol *f)
 		f->max_r = 1.0;
 		f->min_i = -1.5;
 		f->max_i = f->min_i + (f->max_r - f->min_r) * HEIGHT / WIDTH;
+	}
+	else if (f->f_type == JULIA)
+	{
+		f->min_r = -2.0;
+		f->max_r = 2.0;
+		f->min_i = -2.0;
+		f->max_i = f->min_i + (f->max_r - f->min_r) * HEIGHT / WIDTH;
+	}
+	else
+	{
+		f->min_r = -2.0;
+		f->max_r = 1.0;
+		f->max_i = -1.5;
+		f->min_i = f->max_i + (f->max_r - f->min_r) * HEIGHT / WIDTH;
 	}
 }
 

@@ -6,7 +6,7 @@
 #    By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 09:37:05 by ljudd             #+#    #+#              #
-#    Updated: 2025/05/28 14:19:32 by ljudd            ###   ########.fr        #
+#    Updated: 2025/05/28 16:04:04 by ljudd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ SRC				= fractol.c \
 					hook.c \
 					init.c \
 					render.c \
-					fractals_set/mandelbrot.c
+					fractals_set/mandelbrot.c \
+					fractals_set/julia.c \
+					fractals_set/burning_ship.c
 SOURCES			= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects

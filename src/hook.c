@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:56:34 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 14:18:44 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/05/28 16:11:13 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ int	key_hook(int keycode, t_fractol *f)
 		move(f, 0.2, 'L');
 	else if (keycode == KEY_D | keycode == KEY_RIGHT)
 		move(f, 0.2, 'R');
+	else if (keycode == KEY_PLUS | keycode == KEY_PLUS_NUMPAD)
+		zoom(f, 0.5);
+	else if (keycode == KEY_MINUS | keycode == KEY_MINUS_NUMPAD)
+		zoom(f, 2.0);
 	render(f);
 	return (0);
 }

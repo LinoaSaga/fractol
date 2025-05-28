@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:13 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 14:30:40 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/05/28 15:58:50 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 /*		fractal possible types	*/
 # define MANDELBROT 1
+# define JULIA 2
+# define BURNING_SHIP 3
 
 /*		colors	*/
 # define COLOR_BLACK 0x000000
@@ -54,6 +56,8 @@ typedef struct s_fractol
 	double		max_r;
 	double		min_i;
 	double		max_i;
+	double		julia_r;
+	double		julia_i;
 	int			*palette;
 }	t_fractol;
 
@@ -75,6 +79,8 @@ void			set_color(t_fractol *f);
 /*		fractal sets	*/
 
 unsigned int	mandelbrot(double cr, double ci);
+unsigned int	julia(t_fractol *f, double cr, double ci);
+unsigned int	burning_ship(double cr, double ci);
 
 /*		render	*/
 

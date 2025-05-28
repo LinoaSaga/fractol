@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 11:04:49 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 14:42:45 by ljudd            ###   ########.fr       */
+/*   Created: 2025/05/28 14:36:39 by ljudd             #+#    #+#             */
+/*   Updated: 2025/05/28 15:42:44 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/* mandelbrot :
-	cf definition of Mandelbrot set : we test the convergence of the suite
-	Since if |z| > 2 we end up diverging, we note the number of 
-	iterations to eventually reach this situation, while being limited to 
-	MAX_ITER for computation time
+/* julia :
+	similar to Mandelbrot, but intialization is done with the number
+	and iteration is done with the julia parameter
 */
-unsigned int	mandelbrot(double cr, double ci)
+unsigned int	julia(t_fractol *f, double cr, double ci)
 {
 	unsigned int	k;
 	double			zr;
@@ -26,14 +24,14 @@ unsigned int	mandelbrot(double cr, double ci)
 	double			tmp;
 
 	k = -1;
-	zr = 0;
-	zi = 0;
+	zr = cr;
+	zi = ci;
 	while (++k < MAX_ITER)
 	{
 		if (zr * zr + zi * zi > 4)
 			return (k);
-		tmp = 2 * zr * zi + ci;
-		zr = zr * zr - zi * zi + cr;
+		tmp = 2 * zr * zi + f->julia_i;
+		zr = zr * zr - zi * zi + f->julia_r;
 		zi = tmp;
 	}
 	return (k);

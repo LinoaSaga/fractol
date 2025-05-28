@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:04:36 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 14:06:55 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/05/28 16:10:34 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # define KEY_DOWN 65364
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
+# define KEY_PLUS 61
+# define KEY_MINUS 45
+# define KEY_PLUS_NUMPAD 65451
+# define KEY_MINUS_NUMPAD 65453
 
 # define LEFT_CLICK 1
 # define RIGHT_CLICK 3

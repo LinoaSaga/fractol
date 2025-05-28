@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:04:49 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 14:42:45 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/05/28 15:56:53 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/* mandelbrot :
-	cf definition of Mandelbrot set : we test the convergence of the suite
-	Since if |z| > 2 we end up diverging, we note the number of 
-	iterations to eventually reach this situation, while being limited to 
-	MAX_ITER for computation time
+/* abs_value :
+	return the abs value of a
 */
-unsigned int	mandelbrot(double cr, double ci)
+static double	abs_value(double a)
+{
+	if (a < 0)
+		return (-a);
+	return (a);
+}
+
+/* burning_ship :
+	similar to Mandelbrot, the absolute value of the imaginary part and 
+	real part are used instead during each iteration
+*/
+unsigned int	burning_ship(double cr, double ci)
 {
 	unsigned int	k;
 	double			zr;
@@ -32,6 +40,8 @@ unsigned int	mandelbrot(double cr, double ci)
 	{
 		if (zr * zr + zi * zi > 4)
 			return (k);
+		zr = abs_value(zr);
+		zi = abs_value(zi);
 		tmp = 2 * zr * zi + ci;
 		zr = zr * zr - zi * zi + cr;
 		zi = tmp;
