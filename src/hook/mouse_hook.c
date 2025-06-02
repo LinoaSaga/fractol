@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   mouse_hook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:56:34 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 16:11:13 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 18:26:18 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,58 +72,34 @@ void	move(t_fractol *f, double distance, char direction)
 	}
 }
 
-/* zoom :
-	zoom expressed in % of the range
+/* set_julia_param :
+	set the julia parameters at the given point of the screen
+	convert the position given in pixel in a complex number using the current
+	frame
 */
-void	zoom(t_fractol *f, double distance)
+void	set_julia_param(t_fractol *f, int x, int y)
 {
 	double	range_r;
 	double	range_i;
+	double	distance_r;
+	double	distance_i;
 
 	range_r = f->max_r - f->min_r;
 	range_i = f->max_i - f->min_i;
-	f->max_r = f->max_r + range_r * (distance - 1.0) / 2.0;
-	f->min_r = f->max_r - distance * range_r;
-	f->max_i = f->max_i + range_i * (distance - 1.0) / 2.0;
-	f->min_i = f->max_i - distance * range_i;
+	distance_r = (double) x / WIDTH;
+	distance_i = (double) y / HEIGHT;
+	f->julia_r = f->min_r + range_r * distance_r;
+	f->julia_i = f->min_i + range_i * distance_i;
 }
 
-/* key_hook :
-	call the different functions with the right parameters depending
-	on the key pressed :
-	ESCAPE to end the program
-	W or UP to move up
-	S or DOWN to move down
-	A or LEFT to move left
-	D or RIGHT to move right
-*/
-int	key_hook(int keycode, t_fractol *f)
-{
-	if (keycode == KEY_ESC)
-		end_fractol(f);
-	else if (keycode == KEY_W | keycode == KEY_UP)
-		move(f, 0.2, 'U');
-	else if (keycode == KEY_S | keycode == KEY_DOWN)
-		move(f, 0.2, 'D');
-	else if (keycode == KEY_A | keycode == KEY_LEFT)
-		move(f, 0.2, 'L');
-	else if (keycode == KEY_D | keycode == KEY_RIGHT)
-		move(f, 0.2, 'R');
-	else if (keycode == KEY_PLUS | keycode == KEY_PLUS_NUMPAD)
-		zoom(f, 0.5);
-	else if (keycode == KEY_MINUS | keycode == KEY_MINUS_NUMPAD)
-		zoom(f, 2.0);
-	render(f);
-	return (0);
-}
-
-/* key_hook :
+/* mouse_hook :
 	call the different functions with the right parameters depending
 	on the button pressed :
 	RIGHT CLICK or SCROLL DOWN to zoom out
 	LEFT CLICK or SCROLL UP to zoom in
 	For zoom in, we also move the range as such that the point of zoom
 	becomes the new center of the screen
+	MID CLICK to set the julia param at the given coordinates
 */
 int	mouse_hook(int keycode, int x, int y, t_fractol *f)
 {
@@ -146,6 +122,8 @@ int	mouse_hook(int keycode, int x, int y, t_fractol *f)
 			move(f, range_p_i, 'U');
 		zoom(f, 0.5);
 	}
+	if (keycode == MID_CLICK)
+		set_julia_param(f, x, y);
 	render(f);
 	return (0);
 }

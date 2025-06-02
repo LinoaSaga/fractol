@@ -6,11 +6,22 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:54:54 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 14:30:55 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 19:49:13 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	color_switch(t_fractol *f, size_t color, int incr)
+{
+	int	rgb[3];
+
+	rgb[0] = (f->color) & 0xff;
+	rgb[1] = (f->color >> 8) & 0xff;
+	rgb[2] = (f->color >> 16) & 0xff;
+	rgb[color] = (rgb[color] + incr * 10) % 255;
+	f->color = (rgb[2] << 16 | rgb[1] << 8 | rgb[0]);
+}
 
 /* ponderate means :
 	calculate the ponderate mean of the two colors with weight w
@@ -47,7 +58,7 @@ void	set_color_neon(t_fractol *f)
 	int		k;
 
 	color1 = COLOR_BLACK;
-	color2 = COLOR_EMERALD_SEA;
+	color2 = f->color;
 	color3 = COLOR_WHITE;
 	k = -1;
 	while (++k < MAX_ITER / 2)
@@ -72,8 +83,9 @@ void	set_color(t_fractol *f)
 {
 	if (!f->mlx)
 		return ;
-	f->palette = malloc((MAX_ITER + 1) * sizeof(int));
 	if (!f->palette)
-		return ;
+		f->palette = malloc((MAX_ITER + 1) * sizeof(int));
+	if (!f->palette)
+		end_fractol(f);
 	set_color_neon(f);
 }

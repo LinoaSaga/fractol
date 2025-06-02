@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:31:10 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 17:47:51 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 19:46:11 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,4 @@ void	init(t_fractol *f)
 	if (!f->win)
 		end_fractol(f);
 	set_layout(f);
-	set_color(f);
-	if (!f->palette)
-		end_fractol(f);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_core.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:14:49 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 18:01:14 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 19:19:59 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,22 @@ void	get_julia(t_fractol *f, int argc, char **argv)
 {
 	if (f->f_type != JULIA && f->f_type != PHOENIX && f->f_type != MANOWAR)
 		return ;
-	if (f->f_type == JULIA && argc == 2)
+	else if (f->f_type == JULIA && argc < 4)
 	{
 		f->julia_r = -0.8;
 		f->julia_i = 0.156;
 	}
-	if (f->f_type == PHOENIX && argc == 2)
+	else if (f->f_type == PHOENIX && argc < 4)
 	{
 		f->julia_r = 0.56667;
 		f->julia_i = 0;
 	}
-	if (f->f_type == MANOWAR && argc == 2)
+	else if (f->f_type == MANOWAR && argc < 4)
 	{
 		f->julia_r = -0.01;
 		f->julia_i = 0;
 	}
-	else if ((f->f_type == JULIA || f->f_type == PHOENIX
-			|| f->f_type == MANOWAR) && argc == 4)
+	else
 	{
 		if (!ft_atod(argv[2], &(f->julia_r))
 			|| !ft_atod(argv[3], &(f->julia_i)))
@@ -115,10 +114,10 @@ void	get_f_type(t_fractol *f, int argc, char **argv)
 	if (f->f_type == -1)
 		end_fractol(f);
 	else if ((f->f_type == JULIA || f->f_type == PHOENIX
-			|| f->f_type == MANOWAR) && argc != 2 && argc != 4)
+			|| f->f_type == MANOWAR) && argc > 5)
 		end_fractol(f);
 	else if ((f->f_type == MANDELBROT || f->f_type == BURNING_SHIP)
-		&& argc != 2)
+		&& argc > 3)
 		end_fractol(f);
 }
 
@@ -132,8 +131,10 @@ void	get_inputs(t_fractol *f, int argc, char **argv)
 	if (argc == 1)
 	{
 		f->f_type = MANDELBROT;
+		f->color = COLOR_EMERALD_SEA;
 		return ;
 	}
 	get_f_type(f, argc, argv);
 	get_julia(f, argc, argv);
+	get_color(f, argc, argv);
 }

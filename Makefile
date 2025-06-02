@@ -6,7 +6,7 @@
 #    By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 09:37:05 by ljudd             #+#    #+#              #
-#    Updated: 2025/06/02 16:31:24 by ljudd            ###   ########.fr        #
+#    Updated: 2025/06/02 18:52:17 by ljudd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,15 +19,17 @@ INCLUDES		= -Imlx -Ilibft -Iincludes
 SRC_PATH		= src/
 SRC				= fractol.c \
 					color.c \
-					hook.c \
 					init.c \
 					render.c \
-					parser.c \
 					fractals_set/mandelbrot.c \
 					fractals_set/julia.c \
 					fractals_set/burning_ship.c \
 					fractals_set/manowar.c \
-					fractals_set/phoenix.c
+					fractals_set/phoenix.c \
+					hook/key_hook.c \
+					hook/mouse_hook.c \
+					parser/parser_core.c \
+					parser/parser_color.c
 SOURCES			= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects
@@ -70,6 +72,8 @@ $(OBJECTS): $(OBJ_PATH)
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
 	@mkdir $(OBJ_PATH)fractals_set/
+	@mkdir $(OBJ_PATH)hook/
+	@mkdir $(OBJ_PATH)parser/
 
 $(MLX):
 	@make -C $(MLX_DIR) all --no-print-directory

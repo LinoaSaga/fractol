@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:24:32 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 18:01:51 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 19:46:17 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	render(t_fractol *f)
 	int		n_iter_p;
 
 	set_image(f);
+	set_color(f);
 	mlx_clear_window(f->mlx, f->win);
 	x = -1;
 	while (++x < WIDTH)

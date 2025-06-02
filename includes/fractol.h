@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:13 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 17:53:23 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 19:38:26 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 	f_type = type of fractol to be printed
 	min\max_r\i : minimum\maximum real\imaginary number of the graph
 	julia_r\i : complex number c used for the julia set
+	color : main color used to define the palette of color with the function
 	palette : array of the color palette used
 */
 typedef struct s_fractol
@@ -63,6 +64,7 @@ typedef struct s_fractol
 	double		max_i;
 	double		julia_r;
 	double		julia_i;
+	int			color;
 	int			*palette;
 }	t_fractol;
 
@@ -85,11 +87,14 @@ void			init(t_fractol *f);
 /*		hook	*/
 
 int				end_fractol(t_fractol *f);
+void			move(t_fractol *f, double distance, char direction);
+void			zoom(t_fractol *f, double distance);
 int				key_hook(int keycode, t_fractol *f);
 int				mouse_hook(int keycode, int x, int y, t_fractol *f);
 
 /*		color	*/
 
+void			color_switch(t_fractol *f, size_t color, int incr);
 void			set_color(t_fractol *f);
 
 /*		fractal sets	*/
@@ -107,5 +112,6 @@ void			render(t_fractol *f);
 /*		parser	*/
 
 void			get_inputs(t_fractol *f, int argc, char **argv);
+void			get_color(t_fractol *f, int argc, char **argv);
 
 #endif
