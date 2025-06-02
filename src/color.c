@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:54:54 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 19:49:13 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 20:11:30 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,32 @@ void	set_color_neon(t_fractol *f)
 	f->palette[k] = 0xff000000;
 }
 
+/* psych_color :
+	Change the palette obtain with the neon function to obtain a psychedelic
+	effect : concretely, we reverse one color on two
+*/
+void	psych_color(t_fractol *f)
+{
+	size_t	k;
+	int		rgb[3];
+
+	k = -1;
+	while (++k < MAX_ITER)
+	{
+		if (k % 2)
+		{
+			rgb[0] = (f->palette[k]) & 0xff;
+			rgb[1] = (f->palette[k] >> 8) & 0xff;
+			rgb[2] = (f->palette[k] >> 16) & 0xff;
+			rgb[0] = (255 - rgb[0]) % 255;
+			rgb[1] = (255 - rgb[1]) % 255;
+			rgb[2] = (255 - rgb[2]) % 255;
+			f->palette[k] = 0xff << 24 | rgb[2] << 16
+				| rgb[1] << 8 | rgb[0];
+		}
+	}
+}
+
 /* set_color :
 	malloc the color palette, returning NULL in case of error
 	color is fixed with a unique sub function for now
@@ -88,4 +114,6 @@ void	set_color(t_fractol *f)
 	if (!f->palette)
 		end_fractol(f);
 	set_color_neon(f);
+	if (f->psych_color)
+		psych_color(f);
 }

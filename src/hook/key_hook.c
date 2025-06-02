@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:13:51 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 19:41:46 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 20:03:50 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	key_hook(int keycode, t_fractol *f)
 		zoom(f, 0.5);
 	else if (keycode == KEY_MINUS | keycode == KEY_MINUS_NUMPAD)
 		zoom(f, 2.0);
+	else if (keycode == KEY_P)
+		f->psych_color = (f->psych_color + 1) % 2;
 	key_hook_fractal(keycode, f);
 	key_hook_color(keycode, f);
 	render(f);

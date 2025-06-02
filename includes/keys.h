@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:04:36 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 19:28:45 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 20:02:35 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define KEY_E 101
 # define KEY_F 102
 # define KEY_V 118
+# define KEY_P 112
 
 # define LEFT_CLICK 1
 # define MID_CLICK 2

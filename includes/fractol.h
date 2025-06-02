@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:13 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 19:38:26 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 20:01:54 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <limits.h>
+# include <stdbool.h>
 
 /*		windows params	*/
 # define HEIGHT 900
@@ -49,6 +50,7 @@
 	min\max_r\i : minimum\maximum real\imaginary number of the graph
 	julia_r\i : complex number c used for the julia set
 	color : main color used to define the palette of color with the function
+	psych_color : boolean to switch the color palette to psych_color mode
 	palette : array of the color palette used
 */
 typedef struct s_fractol
@@ -65,6 +67,7 @@ typedef struct s_fractol
 	double		julia_r;
 	double		julia_i;
 	int			color;
+	bool		psych_color;
 	int			*palette;
 }	t_fractol;
 

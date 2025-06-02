@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:31:10 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 19:46:11 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 20:02:07 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	c_init(t_fractol *f)
 	f->max_i = 0.0;
 	f->julia_r = 0.0;
 	f->julia_i = 0.0;
+	f->color = 0x000000;
+	f->psych_color = false;
 	f->palette = NULL;
 }
 
