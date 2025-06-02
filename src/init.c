@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:31:10 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 15:14:54 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 17:47:51 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,11 @@ void	set_layout(t_fractol *f)
 		f->min_i = -1.5;
 		f->max_i = f->min_i + (f->max_r - f->min_r) * HEIGHT / WIDTH;
 	}
-	else if (f->f_type == JULIA)
-	{
-		f->min_r = -2.0;
-		f->max_r = 2.0;
-		f->min_i = -2.0;
-		f->max_i = f->min_i + (f->max_r - f->min_r) * HEIGHT / WIDTH;
-	}
 	else
 	{
 		f->min_r = -2.0;
-		f->max_r = 1.0;
-		f->max_i = -1.5;
+		f->max_r = 2.0;
+		f->max_i = -2.0;
 		f->min_i = f->max_i + (f->max_r - f->min_r) * HEIGHT / WIDTH;
 	}
 }
@@ -76,7 +69,6 @@ void	init(t_fractol *f)
 	f->win = mlx_new_window(f->mlx, WIDTH, HEIGHT, "Fractol");
 	if (!f->win)
 		end_fractol(f);
-	f->f_type = MANDELBROT;
 	set_layout(f);
 	set_color(f);
 	if (!f->palette)

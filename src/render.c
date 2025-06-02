@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:24:32 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 15:59:32 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 18:01:51 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ unsigned int	calculate_fractal(t_fractol *f, double cr, double ci)
 		return (julia(f, cr, ci));
 	else if (f->f_type == BURNING_SHIP)
 		return (burning_ship(cr, ci));
+	else if (f->f_type == PHOENIX)
+		return (phoenix(f, cr, ci));
+	else if (f->f_type == MANOWAR)
+		return (manowar(f, cr, ci));
 	return (0);
 }
 

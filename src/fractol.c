@@ -6,17 +6,18 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:17 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 13:38:17 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 16:12:19 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_fractol	f;
 
 	c_init(&f);
+	get_inputs(&f, argc, argv);
 	init(&f);
 	render(&f);
 	mlx_hook(f.win, CLOSING_X, 0L, end_fractol, &f);

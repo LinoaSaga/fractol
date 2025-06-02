@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:13 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 15:58:50 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/02 17:53:23 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define FRACTOL_H
 
 # include "mlx.h"
+# include "libft.h"
 # include "keys.h"
 # include <stdlib.h>
 # include <stdio.h>
+# include <limits.h>
 
 /*		windows params	*/
 # define HEIGHT 900
@@ -29,6 +31,8 @@
 # define MANDELBROT 1
 # define JULIA 2
 # define BURNING_SHIP 3
+# define PHOENIX 4
+# define MANOWAR 5
 
 /*		colors	*/
 # define COLOR_BLACK 0x000000
@@ -43,6 +47,7 @@
 	addr = address of the img to manipulate pixel
 	f_type = type of fractol to be printed
 	min\max_r\i : minimum\maximum real\imaginary number of the graph
+	julia_r\i : complex number c used for the julia set
 	palette : array of the color palette used
 */
 typedef struct s_fractol
@@ -60,6 +65,17 @@ typedef struct s_fractol
 	double		julia_i;
 	int			*palette;
 }	t_fractol;
+
+/* complex:
+	structure introduced later on in the projet to represent a complex number.
+	most of the code was written without using it, it was introduced only
+	to hande the norminette for the phoenix and manowar fractal set
+*/
+typedef struct s_complex
+{
+	double		r;
+	double		i;
+}	t_complex;
 
 /*		init	*/
 
@@ -81,9 +97,15 @@ void			set_color(t_fractol *f);
 unsigned int	mandelbrot(double cr, double ci);
 unsigned int	julia(t_fractol *f, double cr, double ci);
 unsigned int	burning_ship(double cr, double ci);
+unsigned int	phoenix(t_fractol *f, double cr, double ci);
+unsigned int	manowar(t_fractol *f, double cr, double ci);
 
 /*		render	*/
 
 void			render(t_fractol *f);
+
+/*		parser	*/
+
+void			get_inputs(t_fractol *f, int argc, char **argv);
 
 #endif
