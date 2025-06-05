@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:13 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 20:01:54 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/05 10:39:43 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ typedef struct s_complex
 	double		i;
 }	t_complex;
 
+/*		fractol	*/
+
+int				end_fractol(t_fractol *f, char *msg, char display_help);
+
 /*		init	*/
 
 void			c_init(t_fractol *f);
@@ -89,7 +93,7 @@ void			init(t_fractol *f);
 
 /*		hook	*/
 
-int				end_fractol(t_fractol *f);
+int				x_hook(t_fractol *f);
 void			move(t_fractol *f, double distance, char direction);
 void			zoom(t_fractol *f, double distance);
 int				key_hook(int keycode, t_fractol *f);
@@ -116,5 +120,10 @@ void			render(t_fractol *f);
 
 void			get_inputs(t_fractol *f, int argc, char **argv);
 void			get_color(t_fractol *f, int argc, char **argv);
+
+/*		messages	*/
+
+void			print_header(void);
+void			print_help(void);
 
 #endif

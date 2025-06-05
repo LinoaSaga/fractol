@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:14:49 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 19:19:59 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/05 10:31:43 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	get_julia(t_fractol *f, int argc, char **argv)
 	{
 		if (!ft_atod(argv[2], &(f->julia_r))
 			|| !ft_atod(argv[3], &(f->julia_i)))
-			end_fractol(f);
+			end_fractol(f, "Invalid julia parameters, see help below :", 1);
 	}
 }
 
@@ -112,13 +112,13 @@ void	get_f_type(t_fractol *f, int argc, char **argv)
 	else if (!ft_strcmp(s, "manowar") || !ft_strcmp(s, "5"))
 		f->f_type = MANOWAR;
 	if (f->f_type == -1)
-		end_fractol(f);
+		end_fractol(f, "Invalid fractal format, see help below :", 1);
 	else if ((f->f_type == JULIA || f->f_type == PHOENIX
 			|| f->f_type == MANOWAR) && argc > 5)
-		end_fractol(f);
+		end_fractol(f, "Invalid argument counts, see help below :", 1);
 	else if ((f->f_type == MANDELBROT || f->f_type == BURNING_SHIP)
 		&& argc > 3)
-		end_fractol(f);
+		end_fractol(f, "Invalid argument counts, see help below :", 1);
 }
 
 /* get_inputs :
@@ -129,11 +129,7 @@ void	get_f_type(t_fractol *f, int argc, char **argv)
 void	get_inputs(t_fractol *f, int argc, char **argv)
 {
 	if (argc == 1)
-	{
-		f->f_type = MANDELBROT;
-		f->color = COLOR_EMERALD_SEA;
-		return ;
-	}
+		end_fractol(f, "Please provide arguments, see help below :", 1);
 	get_f_type(f, argc, argv);
 	get_julia(f, argc, argv);
 	get_color(f, argc, argv);

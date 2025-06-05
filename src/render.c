@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:24:32 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 19:46:17 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/03 12:09:16 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	set_image(t_fractol *f)
 		mlx_destroy_image(f->mlx, f->img);
 	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
 	if (!f->img)
-		end_fractol(f);
+		end_fractol(f, "Error creating mlx image, program end", 0);
 	f->addr = (int *) mlx_get_data_addr(f->img, &bits_per_pixel,
 			&line_length, &endian);
 }

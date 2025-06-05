@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:31:10 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 20:02:07 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/03 12:08:34 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	init(t_fractol *f)
 {
 	f->mlx = mlx_init();
 	if (!f->mlx)
-		end_fractol(f);
+		end_fractol(f, "Error initializing mlx, program end", 0);
 	f->win = mlx_new_window(f->mlx, WIDTH, HEIGHT, "Fractol");
 	if (!f->win)
-		end_fractol(f);
+		end_fractol(f, "Error mlx window creation, program end", 0);
 	set_layout(f);
 }

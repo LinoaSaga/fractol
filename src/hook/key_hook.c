@@ -6,11 +6,20 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:13:51 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 20:03:50 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/05 10:39:26 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/* x_hook :
+	simply close the program when clicking the x button
+*/
+int	x_hook(t_fractol *f)
+{
+	end_fractol(f, NULL, 0);
+	return (0);
+}
 
 /* zoom :
 	zoom expressed in % of the range
@@ -78,7 +87,7 @@ void	key_hook_color(int keycode, t_fractol *f)
 int	key_hook(int keycode, t_fractol *f)
 {
 	if (keycode == KEY_ESC)
-		end_fractol(f);
+		end_fractol(f, NULL, 0);
 	else if (keycode == KEY_W | keycode == KEY_UP)
 		move(f, 0.2, 'U');
 	else if (keycode == KEY_S | keycode == KEY_DOWN)

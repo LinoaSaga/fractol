@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:54:54 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 20:11:30 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/03 12:07:24 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ void	psych_color(t_fractol *f)
 			rgb[0] = (f->palette[k]) & 0xff;
 			rgb[1] = (f->palette[k] >> 8) & 0xff;
 			rgb[2] = (f->palette[k] >> 16) & 0xff;
-			rgb[0] = (255 - rgb[0]) % 255;
-			rgb[1] = (255 - rgb[1]) % 255;
-			rgb[2] = (255 - rgb[2]) % 255;
+			rgb[0] = (255 - rgb[0]);
+			rgb[1] = (255 - rgb[1]);
+			rgb[2] = (255 - rgb[2]);
 			f->palette[k] = 0xff << 24 | rgb[2] << 16
 				| rgb[1] << 8 | rgb[0];
 		}
@@ -112,7 +112,7 @@ void	set_color(t_fractol *f)
 	if (!f->palette)
 		f->palette = malloc((MAX_ITER + 1) * sizeof(int));
 	if (!f->palette)
-		end_fractol(f);
+		end_fractol(f, "Error allocating color palette, program end", 0);
 	set_color_neon(f);
 	if (f->psych_color)
 		psych_color(f);

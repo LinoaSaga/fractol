@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:51:44 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 19:25:11 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/03 12:11:32 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ void	ft_atocolor(t_fractol *f, char *s, char *base)
 	size_t	k;
 
 	if (ft_strlen(s) != 8)
-		end_fractol(f);
+		end_fractol(f, "Invalid color format, see help below :", 1);
 	if (s[0] != '0' || s[1] != 'x')
-		end_fractol(f);
+		end_fractol(f, "Invalid color format, see help below :", 1);
 	num = 0;
 	k = 1;
 	while (++k < 8)
 	{
 		if (ft_strchrind(base, s[k]) == (size_t) - 1)
-			end_fractol(f);
+			end_fractol(f, "Invalid color format, see help below :", 1);
 		num = num * 16 + ft_strchrind(base, s[k]);
 	}
 	f->color = num;
