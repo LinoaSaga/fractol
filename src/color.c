@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:54:54 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/03 12:07:24 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/05 18:13:09 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ void	color_switch(t_fractol *f, size_t color, int incr)
 	rgb[0] = (f->color) & 0xff;
 	rgb[1] = (f->color >> 8) & 0xff;
 	rgb[2] = (f->color >> 16) & 0xff;
-	rgb[color] = (rgb[color] + incr * 10) % 255;
+	rgb[color] = (rgb[color] + incr * 10) % 256;
+	if (rgb[color] < 0)
+		rgb[color] += 256;
 	f->color = (rgb[2] << 16 | rgb[1] << 8 | rgb[0]);
+	print_cswitch(f, color, incr);
 }
 
 /* ponderate means :

@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:17 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 10:41:46 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/05 16:55:53 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,13 @@ int	main(int argc, char **argv)
 {
 	t_fractol	f;
 
+	ft_printf("%f\n", (double) 1 / 3);
+	printf("%f\n", (double) 100000000);
 	print_header();
 	c_init(&f);
 	get_inputs(&f, argc, argv);
 	init(&f);
+	print_command();
 	render(&f);
 	mlx_hook(f.win, CLOSING_X, 0L, x_hook, &f);
 	mlx_key_hook(f.win, key_hook, &f);

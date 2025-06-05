@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:58:04 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 10:28:08 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/05 12:37:16 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,35 @@ void	print_help(void)
 	ft_putstr_fd("\n", 1);
 	ft_putendl_fd("/Color : color of the fractal fornat 0xRRGGBB    /", 1);
 	ft_putendl_fd("/with RRGGBB in hexadecimal                      /", 1);
+	ft_putstr_fd("\n", 1);
+	ft_putendl_fd("/================================================/", 1);
+}
+
+/* print_command :
+	Print the commands availables
+*/
+void	print_command(void)
+{
+	ft_putstr_fd("\n\n\n", 1);
+	ft_putendl_fd("/================================================/", 1);
+	ft_putendl_fd("/                   COMMANDS                     /", 1);
+	ft_putendl_fd("/================================================/", 1);
+	ft_putstr_fd("\n", 1);
+	ft_putendl_fd("/ Mouse commands --------------------------------/", 1);
+	ft_putendl_fd("/ right click or scroll down : zoom out at center/", 1);
+	ft_putendl_fd("/ left click or scroll up : zoom in at mouse pos /", 1);
+	ft_putendl_fd("/ mid click : set julia parameters at mouse pos  /", 1);
+	ft_putstr_fd("\n", 1);
+	ft_putendl_fd("/ Keyboard commands -----------------------------/", 1);
+	ft_putendl_fd("/ escape : exit the program                      /", 1);
+	ft_putendl_fd("/ w or up : move up                              /", 1);
+	ft_putendl_fd("/ s or down : move down                          /", 1);
+	ft_putendl_fd("/ a or left : move left                          /", 1);
+	ft_putendl_fd("/ d or right : move right                        /", 1);
+	ft_putendl_fd("/ + or + numpad : zoom in at center              /", 1);
+	ft_putendl_fd("/ - or - numpad : zoom out at center             /", 1);
+	ft_putendl_fd("/ p : activate/desactivate psychedelic color mode/", 1);
+	ft_putendl_fd("/ m : print the command message                  /", 1);
 	ft_putstr_fd("\n", 1);
 	ft_putendl_fd("/================================================/", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:13:51 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 10:39:26 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/05 17:52:23 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 */
 int	x_hook(t_fractol *f)
 {
+	print_progend();
 	end_fractol(f, NULL, 0);
 	return (0);
 }
@@ -35,6 +36,7 @@ void	zoom(t_fractol *f, double distance)
 	f->min_r = f->max_r - distance * range_r;
 	f->max_i = f->max_i + range_i * (distance - 1.0) / 2.0;
 	f->min_i = f->max_i - distance * range_i;
+	print_zoom(f, distance);
 }
 
 /* key_hook_fractal :
@@ -42,15 +44,15 @@ void	zoom(t_fractol *f, double distance)
 */
 void	key_hook_fractal(int keycode, t_fractol *f)
 {
-	if (keycode == KEY_1 | keycode == KEY_1_NUMPAD)
+	if (keycode == KEY_1 || keycode == KEY_1_NUMPAD)
 		f->f_type = MANDELBROT;
-	else if (keycode == KEY_2 | keycode == KEY_2_NUMPAD)
+	else if (keycode == KEY_2 || keycode == KEY_2_NUMPAD)
 		f->f_type = JULIA;
-	else if (keycode == KEY_3 | keycode == KEY_3_NUMPAD)
+	else if (keycode == KEY_3 || keycode == KEY_3_NUMPAD)
 		f->f_type = BURNING_SHIP;
-	else if (keycode == KEY_4 | keycode == KEY_4_NUMPAD)
+	else if (keycode == KEY_4 || keycode == KEY_4_NUMPAD)
 		f->f_type = PHOENIX;
-	else if (keycode == KEY_5 | keycode == KEY_5_NUMPAD)
+	else if (keycode == KEY_5 || keycode == KEY_5_NUMPAD)
 		f->f_type = MANOWAR;
 }
 
@@ -87,21 +89,26 @@ void	key_hook_color(int keycode, t_fractol *f)
 int	key_hook(int keycode, t_fractol *f)
 {
 	if (keycode == KEY_ESC)
-		end_fractol(f, NULL, 0);
-	else if (keycode == KEY_W | keycode == KEY_UP)
-		move(f, 0.2, 'U');
-	else if (keycode == KEY_S | keycode == KEY_DOWN)
-		move(f, 0.2, 'D');
-	else if (keycode == KEY_A | keycode == KEY_LEFT)
-		move(f, 0.2, 'L');
-	else if (keycode == KEY_D | keycode == KEY_RIGHT)
-		move(f, 0.2, 'R');
-	else if (keycode == KEY_PLUS | keycode == KEY_PLUS_NUMPAD)
+		x_hook(f);
+	else if (keycode == KEY_W || keycode == KEY_UP)
+		move(f, 0.2, 'U', 1);
+	else if (keycode == KEY_S || keycode == KEY_DOWN)
+		move(f, 0.2, 'D', 1);
+	else if (keycode == KEY_A || keycode == KEY_LEFT)
+		move(f, 0.2, 'L', 1);
+	else if (keycode == KEY_D || keycode == KEY_RIGHT)
+		move(f, 0.2, 'R', 1);
+	else if (keycode == KEY_PLUS || keycode == KEY_PLUS_NUMPAD)
 		zoom(f, 0.5);
-	else if (keycode == KEY_MINUS | keycode == KEY_MINUS_NUMPAD)
+	else if (keycode == KEY_MINUS || keycode == KEY_MINUS_NUMPAD)
 		zoom(f, 2.0);
 	else if (keycode == KEY_P)
+	{
 		f->psych_color = (f->psych_color + 1) % 2;
+		print_pmode(f);
+	}
+	else if (keycode == KEY_M)
+		print_command();
 	key_hook_fractal(keycode, f);
 	key_hook_color(keycode, f);
 	render(f);

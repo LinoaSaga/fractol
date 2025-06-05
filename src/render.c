@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:24:32 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/03 12:09:16 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/05 17:18:01 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ void	render(t_fractol *f)
 	double	ci;
 	int		n_iter_p;
 
+	if (f->max_r > MAX_R || f->max_i > MAX_I
+		|| f->min_r < MIN_R || f->min_i < MIN_I)
+		end_fractol(f, "Error zoomed or moved out of reach, program ends", 0);
 	set_image(f);
 	set_color(f);
 	mlx_clear_window(f->mlx, f->win);

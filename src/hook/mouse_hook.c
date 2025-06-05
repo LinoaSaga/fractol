@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:56:34 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 10:34:42 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/05 17:47:58 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,31 @@
 	move accordingly to a distance expressed in % of the range and
 	a direction (U, D, L, R)
 */
-void	move(t_fractol *f, double distance, char direction)
+void	move(t_fractol *f, double distance, char direction, char msg)
 {
 	double	range_r;
 	double	range_i;
+	double	mod_r;
+	double	mod_i;
 
+	if (msg)
+		print_move(f, direction);
 	range_r = f->max_r - f->min_r;
 	range_i = f->max_i - f->min_i;
+	mod_r = 0;
+	mod_i = 0;
 	if (direction == 'U')
-	{
-		f->max_i -= range_i * distance;
-		f->min_i -= range_i * distance;
-	}
+		mod_i = -1;
 	if (direction == 'D')
-	{
-		f->max_i += range_i * distance;
-		f->min_i += range_i * distance;
-	}
+		mod_i = 1;
 	if (direction == 'L')
-	{
-		f->max_r -= range_r * distance;
-		f->min_r -= range_r * distance;
-	}
+		mod_r = -1;
 	if (direction == 'R')
-	{
-		f->max_r += range_r * distance;
-		f->min_r += range_r * distance;
-	}
+		mod_r = 1;
+	f->max_i += range_i * distance * mod_i;
+	f->min_i += range_i * distance * mod_i;
+	f->max_r += range_r * distance * mod_r;
+	f->min_r += range_r * distance * mod_r;
 }
 
 /* set_julia_param :
@@ -63,6 +61,7 @@ void	set_julia_param(t_fractol *f, int x, int y)
 	distance_i = (double) y / HEIGHT;
 	f->julia_r = f->min_r + range_r * distance_r;
 	f->julia_i = f->min_i + range_i * distance_i;
+	print_julia(f);
 }
 
 /* mouse_hook :
@@ -86,13 +85,13 @@ int	mouse_hook(int keycode, int x, int y, t_fractol *f)
 		range_p_r = (WIDTH / 2.0 - x) / WIDTH;
 		range_p_i = (HEIGHT / 2.0 - y) / HEIGHT;
 		if (range_p_r < 0)
-			move(f, -range_p_r, 'R');
+			move(f, -range_p_r, 'R', 0);
 		else
-			move(f, range_p_r, 'L');
+			move(f, range_p_r, 'L', 0);
 		if (range_p_i < 0)
-			move(f, -range_p_i, 'D');
+			move(f, -range_p_i, 'D', 0);
 		else
-			move(f, range_p_i, 'U');
+			move(f, range_p_i, 'U', 0);
 		zoom(f, 0.5);
 	}
 	if (keycode == MID_CLICK)

@@ -6,12 +6,12 @@
 #    By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 09:37:05 by ljudd             #+#    #+#              #
-#    Updated: 2025/06/05 10:40:38 by ljudd            ###   ########.fr        #
+#    Updated: 2025/06/05 16:14:50 by ljudd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -MMD -MP
 NAME			= fractol
 INCLUDES		= -Imlx -Ilibft -Iincludes
 
@@ -30,17 +30,17 @@ SRC				= fractol.c \
 					hook/mouse_hook.c \
 					parser/parser_core.c \
 					parser/parser_color.c \
-					messages/message_core.c
+					messages/message_core.c \
+					messages/message_key.c \
+					messages/message_mouse.c
 SOURCES			= $(addprefix $(SRC_PATH), $(SRC))
-
-# Headers
-HEADERS			= includes/fractol.h includes/keys.h
 
 # Objects
 OBJ_PATH		= obj/
 OBJ				= $(SRC:.c=.o)
 OBJECTS			= $(addprefix $(OBJ_PATH), $(OBJ))
-
+DEP				= $(SRC:.c=.d)
+DEPS			= $(addprefix $(OBJ_PATH), $(DEP))
 
 # mlx
 MLX				= libmlx.a
@@ -68,7 +68,7 @@ $(NAME): $(OBJECTS)
 	@$(CC) $(CFLAGS) $(OBJECTS) $(MLX_FLAGS) $(LIBFT_FLAGS) -o $(NAME)
 	@printf "$(BLUE)%s$(RESET): $(GREEN)Successfully built $(NAME)$(RESET)\n" $(NAME)
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADERS) | $(OBJ_PATH)
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c | $(OBJ_PATH)
 	@printf "$(BLUE)%s$(RESET): $(MAGENTA)Compiling$(RESET) $<\n" $(NAME)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
@@ -95,11 +95,13 @@ fclean: clean
 	@printf "$(BLUE)%s$(RESET): $(RED)Full clean...$(RESET)\n" $(NAME)
 	@rm -f $(NAME)
 	@rm -f $(MLX_DIR)/$(MLX)
-	@make -C $(LIBFT_DIR) fclean --no-print-directory >> /dev/null
+	@make -C $(LIBFT_DIR) fclean --no-print-directory
 
 re: fclean all
 
 bonus: all
+
+-include $(DEPS)
 
 .PHONY: all clean fclean re bonus $(MLX)
 .DELETE_ON_ERROR:

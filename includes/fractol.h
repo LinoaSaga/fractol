@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:13 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 10:39:43 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/05 17:56:15 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 /*		windows params	*/
 # define HEIGHT 900
 # define WIDTH 900
+
+/*		maximum frame	*/
+# define MIN_R -1000000
+# define MAX_R 1000000
+# define MIN_I -1000000
+# define MAX_I 1000000
 
 /*		computation params	*/
 # define MAX_ITER 60
@@ -94,7 +100,7 @@ void			init(t_fractol *f);
 /*		hook	*/
 
 int				x_hook(t_fractol *f);
-void			move(t_fractol *f, double distance, char direction);
+void			move(t_fractol *f, double distance, char direction, char msg);
 void			zoom(t_fractol *f, double distance);
 int				key_hook(int keycode, t_fractol *f);
 int				mouse_hook(int keycode, int x, int y, t_fractol *f);
@@ -125,5 +131,12 @@ void			get_color(t_fractol *f, int argc, char **argv);
 
 void			print_header(void);
 void			print_help(void);
+void			print_command(void);
+void			print_julia(t_fractol *f);
+void			print_zoom(t_fractol *f, double distance);
+void			print_progend(void);
+void			print_move(t_fractol *f, char direction);
+void			print_pmode(t_fractol *f);
+void			print_cswitch(t_fractol *f, size_t color, int incr);
 
 #endif
