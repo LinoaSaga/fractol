@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:31:10 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 12:05:36 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:25:36 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	c_init(t_fractol *f)
 	f->img = NULL;
 	f->addr = NULL;
 	f->f_type = -1;
-	f->min_r = 0.0;
-	f->max_r = 0.0;
-	f->min_i = 0.0;
-	f->max_i = 0.0;
+	f->center_r = 0.0;
+	f->center_i = 0.0;
+	f->frame_r = 0.0;
+	f->frame_i = 0.0;
+	f->zoom = 0;
 	f->julia_r = 0.0;
 	f->julia_i = 0.0;
 	f->color = 0x000000;
@@ -38,7 +39,7 @@ void	c_init(t_fractol *f)
 /* set_layout :
 	initial layout is dependent of the fractal type we display
 	to get something aesthetic
-	calculate the last one based on the 3 other to avoid deformation
+	calculate the frame_i with frame_r to avoid image deformation
 */
 void	set_layout(t_fractol *f)
 {
@@ -46,18 +47,19 @@ void	set_layout(t_fractol *f)
 		return ;
 	if (f->f_type == MANDELBROT)
 	{
-		f->min_r = -2.0;
-		f->max_r = 1.0;
-		f->min_i = -1.5;
-		f->max_i = f->min_i + (f->max_r - f->min_r) * HEIGHT / WIDTH;
+		f->center_r = -0.5;
+		f->center_i = 0.0;
+		f->frame_r = 3.0;
+		f->frame_i = f->frame_r * HEIGHT / WIDTH;
 	}
 	else
 	{
-		f->min_r = -2.0;
-		f->max_r = 2.0;
-		f->max_i = -2.0;
-		f->min_i = f->max_i + (f->max_r - f->min_r) * HEIGHT / WIDTH;
+		f->center_r = 0.0;
+		f->center_i = 0.0;
+		f->frame_r = 4.0;
+		f->frame_i = f->frame_r * HEIGHT / WIDTH;
 	}
+	f->zoom = 1;
 }
 
 /* init :

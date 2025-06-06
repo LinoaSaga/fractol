@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:13 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 17:56:15 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:19:38 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@
 /*		windows params	*/
 # define HEIGHT 900
 # define WIDTH 900
-
-/*		maximum frame	*/
-# define MIN_R -1000000
-# define MAX_R 1000000
-# define MIN_I -1000000
-# define MAX_I 1000000
 
 /*		computation params	*/
 # define MAX_ITER 60
@@ -53,7 +47,9 @@
 	img = pointer to the img we put in the window
 	addr = address of the img to manipulate pixel
 	f_type = type of fractol to be printed
-	min\max_r\i : minimum\maximum real\imaginary number of the graph
+	center_r/i : coordinates real/imaginary of the center of the screen
+	frame_r/i : length of the real/imaginary axe
+	zoom : zoom expressed in power of 2, only used for display
 	julia_r\i : complex number c used for the julia set
 	color : main color used to define the palette of color with the function
 	psych_color : boolean to switch the color palette to psych_color mode
@@ -66,10 +62,11 @@ typedef struct s_fractol
 	void		*img;
 	int			*addr;
 	char		f_type;
-	double		min_r;
-	double		max_r;
-	double		min_i;
-	double		max_i;
+	double		center_r;
+	double		center_i;
+	double		frame_r;
+	double		frame_i;
+	int			zoom;
 	double		julia_r;
 	double		julia_i;
 	int			color;
@@ -138,5 +135,6 @@ void			print_progend(void);
 void			print_move(t_fractol *f, char direction);
 void			print_pmode(t_fractol *f);
 void			print_cswitch(t_fractol *f, size_t color, int incr);
+void			print_fchange(t_fractol *f);
 
 #endif

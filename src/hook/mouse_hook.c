@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:56:34 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 17:47:58 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:14:51 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,9 @@
 */
 void	move(t_fractol *f, double distance, char direction, char msg)
 {
-	double	range_r;
-	double	range_i;
 	double	mod_r;
 	double	mod_i;
 
-	if (msg)
-		print_move(f, direction);
-	range_r = f->max_r - f->min_r;
-	range_i = f->max_i - f->min_i;
 	mod_r = 0;
 	mod_i = 0;
 	if (direction == 'U')
@@ -37,10 +31,10 @@ void	move(t_fractol *f, double distance, char direction, char msg)
 		mod_r = -1;
 	if (direction == 'R')
 		mod_r = 1;
-	f->max_i += range_i * distance * mod_i;
-	f->min_i += range_i * distance * mod_i;
-	f->max_r += range_r * distance * mod_r;
-	f->min_r += range_r * distance * mod_r;
+	f->center_r += f->frame_r * distance * mod_r;
+	f->center_i += f->frame_i * distance * mod_i;
+	if (msg)
+		print_move(f, direction);
 }
 
 /* set_julia_param :
@@ -50,17 +44,13 @@ void	move(t_fractol *f, double distance, char direction, char msg)
 */
 void	set_julia_param(t_fractol *f, int x, int y)
 {
-	double	range_r;
-	double	range_i;
 	double	distance_r;
 	double	distance_i;
 
-	range_r = f->max_r - f->min_r;
-	range_i = f->max_i - f->min_i;
 	distance_r = (double) x / WIDTH;
 	distance_i = (double) y / HEIGHT;
-	f->julia_r = f->min_r + range_r * distance_r;
-	f->julia_i = f->min_i + range_i * distance_i;
+	f->julia_r = f->center_r + ((double) x - WIDTH / 2) / WIDTH * f->frame_r;
+	f->julia_i = f->center_i + ((double) y - HEIGHT / 2) / HEIGHT * f->frame_i;
 	print_julia(f);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 12:46:31 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 18:04:11 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:22:06 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	print_move(t_fractol *f, char direction)
 		ft_putstr_fd("Moved left, new frames values are : \n", 1);
 	if (direction == 'R')
 		ft_putstr_fd("Moved right, new frames values are : \n", 1);
-	ft_printf("minimum real axis : %f\n", f->min_r);
-	ft_printf("maximum real axis : %f\n", f->max_r);
-	ft_printf("minimum imaginary axis : %f\n", f->min_i);
-	ft_printf("maximum imaginary axis : %f\n", f->max_i);
+	(void) f;
+	ft_printf("center real axis : %f\n", f->center_r);
+	ft_printf("center imaginary axis : %f\n", f->center_i);
+	ft_printf("zoom level : %d\n", f->zoom);
 }
 
 /* print_pmode :
@@ -82,7 +82,18 @@ void	print_cswitch(t_fractol *f, size_t color, int incr)
 /* print_fchange :
 	Print message for fractal change
 */
-/* void	print_fchange(t_fractol *f)
+void	print_fchange(t_fractol *f)
 {
-	
-} */
+	ft_putstr_fd("\n", 1);
+	ft_putstr_fd("Fractal type changed, new fractal type is : ", 1);
+	if (f->f_type == MANDELBROT)
+		ft_putstr_fd("Mandelbrot set\n", 1);
+	else if (f->f_type == JULIA)
+		ft_putstr_fd("Julia set\n", 1);
+	else if (f->f_type == BURNING_SHIP)
+		ft_putstr_fd("Burning Ship set\n", 1);
+	else if (f->f_type == PHOENIX)
+		ft_putstr_fd("Phoenix set\n", 1);
+	else
+		ft_putstr_fd("Man O War set\n", 1);
+}

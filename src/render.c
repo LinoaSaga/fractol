@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:24:32 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 17:18:01 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:15:29 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@ void	render(t_fractol *f)
 	double	ci;
 	int		n_iter_p;
 
-	if (f->max_r > MAX_R || f->max_i > MAX_I
-		|| f->min_r < MIN_R || f->min_i < MIN_I)
-		end_fractol(f, "Error zoomed or moved out of reach, program ends", 0);
 	set_image(f);
 	set_color(f);
 	mlx_clear_window(f->mlx, f->win);
@@ -85,8 +82,9 @@ void	render(t_fractol *f)
 		y = -1;
 		while (++y < HEIGHT)
 		{
-			cr = f->min_r + (double) x * (f->max_r - f->min_r) / (WIDTH - 1);
-			ci = f->min_i + (double) y * (f->max_i - f->min_i) / (HEIGHT - 1);
+			cr = f->center_r + ((double) x - WIDTH / 2) / WIDTH * f->frame_r;
+			ci = f->center_i + + ((double) y - HEIGHT / 2) / HEIGHT
+				* f->frame_i;
 			n_iter_p = calculate_fractal(f, cr, ci);
 			pixel_put(f, x, y, f->palette[n_iter_p]);
 		}

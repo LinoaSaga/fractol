@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:13:51 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 17:52:23 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:26:02 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,16 @@ int	x_hook(t_fractol *f)
 }
 
 /* zoom :
-	zoom expressed in % of the range
+	zoom expressed in % of the frame
 */
 void	zoom(t_fractol *f, double distance)
 {
-	double	range_r;
-	double	range_i;
-
-	range_r = f->max_r - f->min_r;
-	range_i = f->max_i - f->min_i;
-	f->max_r = f->max_r + range_r * (distance - 1.0) / 2.0;
-	f->min_r = f->max_r - distance * range_r;
-	f->max_i = f->max_i + range_i * (distance - 1.0) / 2.0;
-	f->min_i = f->max_i - distance * range_i;
+	f->frame_r *= distance;
+	f->frame_i *= distance;
+	if (distance < 1)
+		f->zoom++;
+	else
+		f->zoom--;
 	print_zoom(f, distance);
 }
 
@@ -54,6 +51,9 @@ void	key_hook_fractal(int keycode, t_fractol *f)
 		f->f_type = PHOENIX;
 	else if (keycode == KEY_5 || keycode == KEY_5_NUMPAD)
 		f->f_type = MANOWAR;
+	else
+		return ;
+	print_fchange(f);
 }
 
 /* key_hook_color :
