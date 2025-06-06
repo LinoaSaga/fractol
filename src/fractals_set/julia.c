@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:36:39 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 15:42:44 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:36:58 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 unsigned int	julia(t_fractol *f, double cr, double ci)
 {
-	unsigned int	k;
+	int	k;
 	double			zr;
 	double			zi;
 	double			tmp;
@@ -26,7 +26,7 @@ unsigned int	julia(t_fractol *f, double cr, double ci)
 	k = -1;
 	zr = cr;
 	zi = ci;
-	while (++k < MAX_ITER)
+	while (++k < f->iter)
 	{
 		if (zr * zr + zi * zi > 4)
 			return (k);

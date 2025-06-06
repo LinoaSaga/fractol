@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:04:49 by ljudd             #+#    #+#             */
-/*   Updated: 2025/05/28 15:56:53 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:37:00 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static double	abs_value(double a)
 	similar to Mandelbrot, the absolute value of the imaginary part and 
 	real part are used instead during each iteration
 */
-unsigned int	burning_ship(double cr, double ci)
+unsigned int	burning_ship(t_fractol *f, double cr, double ci)
 {
-	unsigned int	k;
+	int	k;
 	double			zr;
 	double			zi;
 	double			tmp;
@@ -36,7 +36,7 @@ unsigned int	burning_ship(double cr, double ci)
 	k = -1;
 	zr = 0;
 	zi = 0;
-	while (++k < MAX_ITER)
+	while (++k < f->iter)
 	{
 		if (zr * zr + zi * zi > 4)
 			return (k);

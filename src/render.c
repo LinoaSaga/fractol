@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:24:32 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/06 15:15:29 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:34:00 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	set_image(t_fractol *f)
 unsigned int	calculate_fractal(t_fractol *f, double cr, double ci)
 {
 	if (f->f_type == MANDELBROT)
-		return (mandelbrot(cr, ci));
+		return (mandelbrot(f, cr, ci));
 	else if (f->f_type == JULIA)
 		return (julia(f, cr, ci));
 	else if (f->f_type == BURNING_SHIP)
-		return (burning_ship(cr, ci));
+		return (burning_ship(f, cr, ci));
 	else if (f->f_type == PHOENIX)
 		return (phoenix(f, cr, ci));
 	else if (f->f_type == MANOWAR)

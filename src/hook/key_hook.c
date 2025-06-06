@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:13:51 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/06 15:26:02 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:32:23 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,19 @@ void	zoom(t_fractol *f, double distance)
 	f->frame_r *= distance;
 	f->frame_i *= distance;
 	if (distance < 1)
+	{
+		f->iter += STEP_ITER;
+		if (f->iter > MAX_ITER)
+			f->iter = MAX_ITER;
 		f->zoom++;
+	}
 	else
+	{
+		f->iter -= STEP_ITER;
+		if (f->iter < MIN_ITER)
+			f->iter = MIN_ITER;
 		f->zoom--;
+	}
 	print_zoom(f, distance);
 }
 

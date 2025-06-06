@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:34:25 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/02 16:57:51 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:36:51 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 */
 unsigned int	phoenix(t_fractol *f, double cr, double ci)
 {
-	unsigned int	k;
+	int	k;
 	t_complex		zn;
 	t_complex		zn1;
 	t_complex		tmp;
@@ -27,7 +27,7 @@ unsigned int	phoenix(t_fractol *f, double cr, double ci)
 	zn.i = ci;
 	zn1.r = 0;
 	zn1.i = 0;
-	while (++k < MAX_ITER)
+	while (++k < f->iter)
 	{
 		if (zn.r * zn.r + zn.i * zn.i > 4)
 			return (k);

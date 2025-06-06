@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:31:10 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/06 15:25:36 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:30:43 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	c_init(t_fractol *f)
 	f->color = 0x000000;
 	f->psych_color = false;
 	f->palette = NULL;
+	f->iter = 0;
 }
 
 /* set_layout :
@@ -60,6 +61,7 @@ void	set_layout(t_fractol *f)
 		f->frame_i = f->frame_r * HEIGHT / WIDTH;
 	}
 	f->zoom = 1;
+	f->iter = MIN_ITER;
 }
 
 /* init :

@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:54:54 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/05 18:13:09 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:37:39 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ void	set_color_neon(t_fractol *f)
 	color2 = f->color;
 	color3 = COLOR_WHITE;
 	k = -1;
-	while (++k < MAX_ITER / 2)
+	while (++k < f->iter / 2)
 	{
-		w = ((double) k) / (MAX_ITER / 2.0 - 1.0);
+		w = ((double) k) / (f->iter / 2.0 - 1.0);
 		f->palette[k] = ponderate_mean(color1, color2, w);
 	}
-	while (k < MAX_ITER)
+	while (k < f->iter)
 	{
-		w = ((double) k - MAX_ITER / 2.0) / (MAX_ITER - 1.0 - MAX_ITER / 2.0);
+		w = ((double) k - f->iter / 2.0) / (f->iter - 1.0 - f->iter / 2.0);
 		f->palette[k] = ponderate_mean(color2, color3, w);
 		k++;
 	}
@@ -84,11 +84,11 @@ void	set_color_neon(t_fractol *f)
 */
 void	psych_color(t_fractol *f)
 {
-	size_t	k;
-	int		rgb[3];
+	int	k;
+	int	rgb[3];
 
 	k = -1;
-	while (++k < MAX_ITER)
+	while (++k < f->iter)
 	{
 		if (k % 2)
 		{

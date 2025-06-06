@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:13 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/06 15:19:38 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:41:56 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@
 # define WIDTH 900
 
 /*		computation params	*/
-# define MAX_ITER 60
+# define MIN_ITER 60
+# define STEP_ITER 20
+# define MAX_ITER 1800
 
 /*		fractal possible types	*/
 # define MANDELBROT 1
@@ -54,6 +56,7 @@
 	color : main color used to define the palette of color with the function
 	psych_color : boolean to switch the color palette to psych_color mode
 	palette : array of the color palette used
+	iter : number of iteration used for computation
 */
 typedef struct s_fractol
 {
@@ -72,6 +75,7 @@ typedef struct s_fractol
 	int			color;
 	bool		psych_color;
 	int			*palette;
+	int			iter;
 }	t_fractol;
 
 /* complex:
@@ -109,9 +113,9 @@ void			set_color(t_fractol *f);
 
 /*		fractal sets	*/
 
-unsigned int	mandelbrot(double cr, double ci);
+unsigned int	mandelbrot(t_fractol *f, double cr, double ci);
 unsigned int	julia(t_fractol *f, double cr, double ci);
-unsigned int	burning_ship(double cr, double ci);
+unsigned int	burning_ship(t_fractol *f, double cr, double ci);
 unsigned int	phoenix(t_fractol *f, double cr, double ci);
 unsigned int	manowar(t_fractol *f, double cr, double ci);
 
