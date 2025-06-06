@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:36:39 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/06 15:36:58 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:16:36 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 */
 unsigned int	julia(t_fractol *f, double cr, double ci)
 {
-	int	k;
-	double			zr;
-	double			zi;
-	double			tmp;
+	int		k;
+	double	zr;
+	double	zi;
+	double	tmp;
 
 	k = -1;
 	zr = cr;

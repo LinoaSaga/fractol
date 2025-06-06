@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:04:49 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/06 15:37:00 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:16:42 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static double	abs_value(double a)
 */
 unsigned int	burning_ship(t_fractol *f, double cr, double ci)
 {
-	int	k;
-	double			zr;
-	double			zi;
-	double			tmp;
+	int		k;
+	double	zr;
+	double	zi;
+	double	tmp;
 
 	k = -1;
 	zr = 0;
