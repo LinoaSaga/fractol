@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:31:10 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/06 15:30:43 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:11:24 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	set_layout(t_fractol *f)
 		f->frame_r = 4.0;
 		f->frame_i = f->frame_r * HEIGHT / WIDTH;
 	}
-	f->zoom = 1;
+	f->zoom = 0;
 	f->iter = MIN_ITER;
 }
 

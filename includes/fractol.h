@@ -6,7 +6,7 @@
 /*   By: ljudd <ljudd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:58:13 by ljudd             #+#    #+#             */
-/*   Updated: 2025/06/06 15:41:56 by ljudd            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:14:13 by ljudd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 /*		computation params	*/
 # define MIN_ITER 60
-# define STEP_ITER 20
+# define STEP_ITER 30
 # define MAX_ITER 1800
 
 /*		fractal possible types	*/
